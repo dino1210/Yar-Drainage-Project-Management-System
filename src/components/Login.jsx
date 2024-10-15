@@ -22,9 +22,9 @@ const Login = () => {
                 <IoPerson className="text-[#17A2B8] h-10 w-auto"/>
                 </div>
                 <label className='text-sm'>Username:</label>
-                <input className='border p-2 w-full' type='text' placeholder='Username' />
+                <input className='border p-2 w-full bg-[#D9D9D9] rounded-md text-sm' type='text' placeholder='Username' />
                 <label className='text-sm'>Password:</label>
-                <input className='border p-2 w-full mb-5' type='password' placeholder='Password' />   
+                <input className='border p-2 w-full bg-[#D9D9D9] rounded-md text-sm mb-5' type='password' placeholder='Password' />   
                 <button className='bg-[#17A2B8] text-white w-full rounded-lg py-1 mb-12' type='subm'>Login</button>
                 <p className='text-sm'>Need Help? <a href="www.google.com">Contact Administrator</a></p>         
             </form>
