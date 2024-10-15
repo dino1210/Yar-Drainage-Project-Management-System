@@ -1,6 +1,7 @@
 import React from 'react'
 import bg from '../assets/bg.jpg'
 import companyLogo from '../assets/companyLogo.png'
+import { IoPerson } from "react-icons/io5";
 
 const Login = () => {
   return (
@@ -17,13 +18,15 @@ const Login = () => {
                 {/*<img className='w-[150px] h-auto mx-auto mt-4' src={companyLogo} alt='Company Logo' />*/}
              </div>
             <form className='bg-white h-[400px] w-[300px] rounded-[30px] p-7'>
-                <h2>LOGIN</h2>
-                <label>Username</label>
-                <input type='text' placeholder='Username' />
-                <label>Password</label>
-                <input type='password' placeholder='Username' />   
-                <button>Login</button>
-                <p>Need Help? <a href="www.google.com">Contact Administrator</a></p>         
+                <div className='flex flex-col items-center m-8'>
+                <IoPerson className="text-[#17A2B8] h-10 w-auto"/>
+                </div>
+                <label className='text-sm'>Username:</label>
+                <input className='border p-2 w-full' type='text' placeholder='Username' />
+                <label className='text-sm'>Password:</label>
+                <input className='border p-2 w-full mb-5' type='password' placeholder='Password' />   
+                <button className='bg-[#17A2B8] text-white w-full rounded-lg py-1 mb-12' type='subm'>Login</button>
+                <p className='text-sm'>Need Help? <a href="www.google.com">Contact Administrator</a></p>         
             </form>
         </div>
     </div>
