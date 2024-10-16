@@ -26,7 +26,7 @@ const Login = () => {
                 <label className='text-sm'>Password:</label>
                 <input className='border p-2 w-full bg-[#D9D9D9] rounded-md text-sm mb-5' type='password' placeholder='Password' />   
                 <button className='bg-[#17A2B8] text-white w-full rounded-lg py-1 mb-12' type='subm'>Login</button>
-                <p className='text-sm'>Need Help? <a href="www.google.com">Contact Administrator</a></p>         
+                <p className='text-xs text-center bg-[#D9D9D9] -mx-7 p-3.5 rounded-b-[30px]'>Need Help? <a className='text-[#17A2B8]' href="www.google.com" target='_blank'>Contact Administrator</a></p>         
             </form>
         </div>
     </div>
