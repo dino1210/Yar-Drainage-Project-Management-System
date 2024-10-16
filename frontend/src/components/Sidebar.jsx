@@ -1,21 +1,15 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users } from "lucide-react";
+import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, TrendingUp, ListChecks, NotepadText, UserRoundCog } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
-  {
-    name: "Overview",
-    icon: BarChart2,
-    color: "#96c8a2",
-    href: "/",
-  },
-  { name: "Products", icon: ShoppingBag, color: "#40826d", href: "/products" },
-  { name: "Users", icon: Users, color: "#00827f ", href: "/users" },
-  { name: "Sales", icon: DollarSign, color: "#2f847c", href: "/sales" },
-  { name: "Orders", icon: ShoppingCart, color: "#88d8c0", href: "/orders" },
-  { name: "Analytics", icon: TrendingUp, color: "#367588", href: "/analytics" },
-  { name: "Settings", icon: Settings, color: "#20b2aa ", href: "/settings" },
+  { name: "Dashboard", icon: BarChart2, color: "white", href: "/",},
+  { name: "Inventory Management", icon: ShoppingBag, color: "white", href: "/products" },
+  { name: "Check-In/Check-Out", icon: ListChecks, color: "white", href: "/users" },
+  { name: "Reports", icon: NotepadText, color: "white", href: "/sales" },
+  { name: "User Management", icon: UserRoundCog, color: "white", href: "/orders" },
+  { name: "Settings", icon: Settings, color: "white", href: "/settings" },
 ];
 
 
@@ -33,15 +27,15 @@ const Sidebar = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit"
+          className="p-2 mb-20 rounded-full hover:bg-gray-700 transition-colors max-w-fit"
         >
           <Menu size={24} />
         </motion.button>
 
-        <nav className="mt-8 flex-grow">
+        <nav className="mt-5 flex-grow">
           {SIDEBAR_ITEMS.map((item) => (
             <Link key={item.href} to={item.href}>
-              <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors mb-4">
+              <motion.div className="flex items-center p-2 text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors mb-4">
                 <item.icon
                   size={22}
                   style={{ color: item.color, minWidth: "22px" }}
