@@ -2,13 +2,14 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
-import OverviewPage from "./pages/OverviewPage";
-import ProductsPage from "./pages/ProductsPage";
-import UsersPage from "./pages/UsersPage";
-import SalesPage from "./pages/SalesPage";
-import OrdersPage from "./pages/OrdersPage";
-import AnalyticsPage from "./pages/AnalyticsPage";
-import SettingsPage from "./pages/SettingsPage";
+import Check from "./Pages/Check";
+import Dasboard from "./Pages/Dasboard";
+import InventoryManagement from "./Pages/InventoryManagement";
+import Settings from "./Pages/Settings";
+import UserManagement from "./Pages/UserManagement";
+import Reports from "./Pages/Reports";
+
+
 
 function App() {
   return (
