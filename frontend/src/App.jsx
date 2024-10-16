@@ -1,11 +1,12 @@
 import './App.css'
 import Login from './components/Login'
+import Sidebar from './components/Sidebar'
 
 function App() {
 
   return (
     <div>
-      <Login />
+      <Sidebar />
     </div>
   )
 }
