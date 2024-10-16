@@ -2,13 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
+import Dashboard from "./pages/Dashboard";
+import InventoryManagement from "./pages/InventoryManagement";
 import Check from "./Pages/Check";
-import Dasboard from "./Pages/Dasboard";
-import InventoryManagement from "./Pages/InventoryManagement";
-import Settings from "./Pages/Settings";
-import UserManagement from "./Pages/UserManagement";
-import Reports from "./Pages/Reports";
-
+import Reports from "./Pages/Reports"
+import UserManagement from "./pages/UserManagement";
+import Setting from "./Pages/Setting";
 
 
 function App() {
@@ -21,13 +20,12 @@ function App() {
 
       <Sidebar />
       <Routes>
-        <Route path="/" element={<OverviewPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/users" element={<UsersPage />} />
-        <Route path="/sales" element={<SalesPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/inventory" element={<InventoryManagement />} />
+        <Route path="/users" element={<Check />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/orders" element={<UserManagement />} />
+        <Route path="/setting" element={<Setting />} />
       </Routes>
     </div>
   );

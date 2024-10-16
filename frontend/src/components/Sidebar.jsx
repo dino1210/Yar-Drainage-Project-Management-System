@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
   { name: "Dashboard", icon: BarChart2, color: "white", href: "/",},
-  { name: "Inventory Management", icon: ShoppingBag, color: "white", href: "/products" },
-  { name: "Check-In/Check-Out", icon: ListChecks, color: "white", href: "/users" },
-  { name: "Reports", icon: NotepadText, color: "white", href: "/sales" },
-  { name: "User Management", icon: UserRoundCog, color: "white", href: "/orders" },
-  { name: "Settings", icon: Settings, color: "white", href: "/settings" },
+  { name: "Inventory Management", icon: ShoppingBag, color: "white", href: "/inventory" },
+  { name: "Check-In/Check-Out", icon: ListChecks, color: "white", href: "/check" },
+  { name: "Reports", icon: NotepadText, color: "white", href: "/reports" },
+  { name: "User Management", icon: UserRoundCog, color: "white", href: "/user" },
+  { name: "Setting", icon: Settings, color: "white", href: "/setting" },
 ];
 
 
