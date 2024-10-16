@@ -1,71 +1,47 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users } from "lucide-react";
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
-
-const SIDEBAR_ITEMS = [
-  {
-    name: "Overview",
-    icon: BarChart2,
-    color: "#96c8a2",
-    href: "/",
-  },
-  { name: "Products", icon: ShoppingBag, color: "#40826d", href: "/products" },
-  { name: "Users", icon: Users, color: "#00827f ", href: "/users" },
-  { name: "Sales", icon: DollarSign, color: "#2f847c", href: "/sales" },
-  { name: "Orders", icon: ShoppingCart, color: "#88d8c0", href: "/orders" },
-  { name: "Analytics", icon: TrendingUp, color: "#367588", href: "/analytics" },
-  { name: "Settings", icon: Settings, color: "#20b2aa ", href: "/settings" },
-];
-
+import React from 'react';
+import { FaTachometerAlt, FaBox, FaClipboardCheck, FaUserCog, FaCog } from 'react-icons/fa'; 
 
 const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
-    <motion.div
-      className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
-        isSidebarOpen ? "w-64" : "w-20"
-      }`}
-      animate={{ width: isSidebarOpen ? 256 : 80 }}
-    >
-      <div className="h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="p-2 rounded-full hover:bg-gray-700 transition-colors max-w-fit"
-        >
-          <Menu size={24} />
-        </motion.button>
-
-        <nav className="mt-8 flex-grow">
-          {SIDEBAR_ITEMS.map((item) => (
-            <Link key={item.href} to={item.href}>
-              <motion.div className="flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors mb-4">
-                <item.icon
-                  size={22}
-                  style={{ color: item.color, minWidth: "22px" }}
-                />
-                <AnimatePresence>
-                  {isSidebarOpen && (
-                    <motion.span
-                      className="ml-4 whitespace-nowrap"
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
-                      exit={{ opacity: 0, width: 0 }}
-                      transition={{ duration: 0.2, delay: 0.3 }}
-                    >
-                      {item.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </Link>
-          ))}
-        </nav>
+    <div className='w-64 bg-gray-700 fixed h-full'>
+      <div className='my-2 mb-4'>
+        <h1 className='ml-6 text-2xl text-white font-bold'>Yar Drainage IMS</h1>
       </div>
-    </motion.div>
+      <hr />
+      <ul className='mt-3 text-white font-bold'>
+        <li className='ml-4 mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
+          <a href="" className='flex items-center p-2 text-white'>
+            <FaTachometerAlt className='mr-2' />
+            Dashboard
+          </a>
+        </li>
+        <li className='ml-4 mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
+          <a href="" className='flex items-center p-2 text-white'>
+            <FaBox className='mr-2' /> 
+            Inventory Management
+          </a>
+        </li>
+        <li className='ml-4 mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
+          <a href="" className='flex items-center p-2 text-white'>
+            <FaClipboardCheck className='mr-2' /> 
+            Check-In/Check-Out
+          </a>
+        </li>
+        <li className='ml-4 mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
+          <a href="" className='flex items-center p-2 text-white'>
+            <FaUserCog className='mr-2' /> 
+            User Management
+          </a>
+        </li>
+        <li className='ml-4 mb-2 rounded hover:shadow hover:bg-blue-500 py-2'>
+          <a href="" className='flex items-center p-2 text-white'>
+            <FaCog className='mr-2' /> 
+            Settings
+          </a>
+        </li>
+      </ul>
+    </div>
   );
-};
+}
 
-export default Sidebar
+export default Sidebar;
