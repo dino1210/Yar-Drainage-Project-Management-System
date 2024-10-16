@@ -17,15 +17,15 @@ const Login = () => {
                 <h2 className='text-white'>Inventory Management System</h2>
                 {/*<img className='w-[150px] h-auto mx-auto mt-4' src={companyLogo} alt='Company Logo' />*/}
              </div>
-            <form className='bg-white h-[400px] w-[300px] rounded-[30px] p-7'>
-                <div className='flex flex-col items-center m-8'>
+            <form className='bg-white max-h-[350px] max-w-[300px] rounded-[30px] p-7'>
+                <div className='flex flex-col items-center mb-5'>
                 <IoPerson className="text-[#17A2B8] h-10 w-auto"/>
                 </div>
                 <label className='text-sm'>Username:</label>
                 <input className='border p-2 w-full bg-[#D9D9D9] rounded-md text-sm' type='text' placeholder='Username' />
                 <label className='text-sm'>Password:</label>
                 <input className='border p-2 w-full bg-[#D9D9D9] rounded-md text-sm mb-5' type='password' placeholder='Password' />   
-                <button className='bg-[#17A2B8] text-white w-full rounded-lg py-1 mb-12' type='subm'>Login</button>
+                <button className='bg-[#17A2B8] text-white w-full rounded-lg py-1 mb-11' type='submit'>Login</button>
                 <p className='text-xs text-center bg-[#D9D9D9] -mx-7 p-3.5 rounded-b-[30px]'>Need Help? <a className='text-[#17A2B8]' href="www.google.com" target='_blank'>Contact Administrator</a></p>         
             </form>
         </div>
