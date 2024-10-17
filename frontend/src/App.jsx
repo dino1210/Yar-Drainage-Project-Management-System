@@ -3,8 +3,8 @@ import "./App.css";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
 import Upperbar from "./components/Upperbar";
-import Dashboard from "./pages/Dashboard";
-import InventoryManagement from "./pages/InventoryManagement";
+import Dashboard from "./Pages/Dashboard";
+import InventoryManagement from "./Pages/InventoryManagement";
 import Check from "./Pages/Check";
 import Reports from "./Pages/Reports"
 import UserManagement from "./pages/UserManagement";
@@ -22,9 +22,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/inventory" element={<InventoryManagement />} />
-        <Route path="/users" element={<Check />} />
+        <Route path="/check" element={<Check />} />
         <Route path="/reports" element={<Reports />} />
-        <Route path="/orders" element={<UserManagement />} />
+        <Route path="/users" element={<UserManagement />} />
         <Route path="/setting" element={<Setting />} />
       </Routes>
     </div>

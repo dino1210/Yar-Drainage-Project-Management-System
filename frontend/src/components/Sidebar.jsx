@@ -8,7 +8,7 @@ const SIDEBAR_ITEMS = [
   { name: "Inventory Management", icon: ShoppingBag, color: "gray", href: "/inventory" },
   { name: "Check-In/Check-Out", icon: ListChecks, color: "gray", href: "/check" },
   { name: "Reports", icon: NotepadText, color: "gray", href: "/reports" },
-  { name: "User Management", icon: UserRoundCog, color: "gray", href: "/user" },
+  { name: "User Management", icon: UserRoundCog, color: "gray", href: "/users" },
   { name: "Setting", icon: Settings, color: "gray", href: "/setting" },
 ];
 
@@ -38,7 +38,7 @@ const Sidebar = () => {
               <motion.div className="flex items-center p-2 text-sm font-medium rounded-lg hover:bg-gray-900 transition-colors mb-4">
                 <item.icon
                   size={22}
-                  style={{ color: item.color, minWidth: "22px" }}
+                  style={{ color: item.color, minWidth: "22px", }}
                 />
                 <AnimatePresence>
                   {isSidebarOpen && (
