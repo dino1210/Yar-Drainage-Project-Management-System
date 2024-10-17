@@ -2,9 +2,9 @@ import React from 'react'
 
 const InventoryManagement = () => {
   return (
-    <div className='flex justify-center mx-0 my-24'>
-      <div className='bg-white p-100'>
-        <h1 className='text-black text-xl'>Ronald J Labrado Jr.</h1>
+    <div className='flex justify-center'>
+      <div className='bg-white text-black font-mono shadow-lg p-5 my-20 mx-10 min-w-40 rounded-xl'>
+        <h1>Recently Checked Out</h1>
       </div>
     </div>
   )
