@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
+import Upperbar from "./components/Upperbar";
 import Dashboard from "./pages/Dashboard";
 import InventoryManagement from "./pages/InventoryManagement";
 import Check from "./Pages/Check";
@@ -16,6 +17,7 @@ function App() {
       <div className="fixed inset-0 z-0">
       </div>
 
+      <Upperbar />
       <Sidebar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
