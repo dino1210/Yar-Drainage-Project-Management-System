@@ -21,7 +21,7 @@ const Reports = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+    <div className="w-full h-screen flex flex-col justify-center items-center min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
       <div className="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-lg w-full max-w-2xl">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 text-center mb-6">
           YAR SYSTEM Reports

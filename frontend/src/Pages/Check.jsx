@@ -29,7 +29,7 @@ const equipmentData = [
 
 const Check = () => {
   return (
-    <div className="flex justify-center">
+    <div className="w-full h-screen flex justify-center">
       <div className="bg-gray-100 rounded-lg p-5 shadow-lg w-full max-w-4xl">
 
         <h1 className="text-3xl font-bold mb-5 text-center">Equipment List</h1>
