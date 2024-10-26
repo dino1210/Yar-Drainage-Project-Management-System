@@ -7,7 +7,7 @@ import Dashboard from "./Pages/Dashboard";
 import InventoryManagement from "./Pages/InventoryManagement";
 import Check from "./Pages/Check";
 import Reports from "./Pages/Reports"
-import UserManagement from "./pages/UserManagement";
+import UserManagement from "./Pages/UserManagement";
 import Setting from "./Pages/Setting";
 
 
