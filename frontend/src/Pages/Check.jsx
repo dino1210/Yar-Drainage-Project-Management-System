@@ -167,7 +167,7 @@ const InventoryTable = () => {
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-semibold text-gray-800">
-          Inventory Management
+          Check-In/Check-Out
         </h1>
         <button
           onClick={() => setShowAddItemModal(true)}
