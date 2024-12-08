@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const UserRow = ({ user }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -14,13 +14,16 @@ const UserRow = ({ user }) => {
 
   return (
     <>
-      <tr>
+      <tr className="hover:bg-gray-100">
         <td className="border-b p-2">{user.name}</td>
         <td className="border-b p-2">{user.role}</td>
         <td className="border-b p-2">{user.email}</td>
         <td className="border-b p-2">
           <button className="text-blue-500 hover:underline mr-2">Edit</button>
-          <button onClick={handleDelete} className="text-red-500 hover:underline">
+          <button
+            onClick={handleDelete}
+            className="text-red-500 hover:underline"
+          >
             Delete
           </button>
         </td>

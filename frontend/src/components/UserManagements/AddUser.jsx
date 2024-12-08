@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const AddUser = ({ onClose }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('Staff');
+const AddUser = ({ onAddUser, onClose }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("Staff");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate inputs
     if (!name || !email || !role) {
-      setError('Please fill out all fields.');
+      setError("Please fill out all fields.");
       return;
     }
-    setError('');
+
+    setError("");
     setIsSubmitting(true);
+
+    // Simulate API call
     setTimeout(() => {
-      alert(`User added: ${name}, ${email}, ${role}`);
+      onAddUser({ name, email, role });
       setIsSubmitting(false);
-      onClose();
-    }, 2000);
+    }, 1000);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow-lg w-96">
+      <div className="bg-white p-6 rounded shadow-lg w-96 animate-fadeIn">
         <h2 className="text-xl font-bold mb-4">Add New User</h2>
+
+        {/* Error Message */}
         {error && <div className="text-red-500 mb-2">{error}</div>}
+
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block font-medium">Name</label>
@@ -59,6 +67,8 @@ const AddUser = ({ onClose }) => {
               <option value="Staff">Staff</option>
             </select>
           </div>
+
+          {/* Buttons */}
           <div className="flex justify-end space-x-4">
             <button
               type="button"
@@ -72,7 +82,7 @@ const AddUser = ({ onClose }) => {
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Adding...' : 'Add User'}
+              {isSubmitting ? "Adding..." : "Add User"}
             </button>
           </div>
         </form>
