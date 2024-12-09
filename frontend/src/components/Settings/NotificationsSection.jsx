@@ -13,27 +13,30 @@ const NotificationsSection = () => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          strokeWidth="2"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="2"
-            d="M15 17h5l-1.405-1.405M5 17h5l-1.405-1.405M6 10h4m-2-2v4M18 12h2m-2 0a6 6 0 100-12 6 6 0 000 12z"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0m6 0H9"
           />
         </svg>
       }
     >
       <div className="space-y-4">
+        {/* Push Notifications Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-gray-800">Push Notifications</span>
+          <span className="text-gray-800 font-medium">Push Notifications</span>
           <ToggleSwitch />
         </div>
+        {/* Email Notifications Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-gray-800">Email Notifications</span>
+          <span className="text-gray-800 font-medium">Email Notifications</span>
           <ToggleSwitch />
         </div>
+        {/* SMS Notifications Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-gray-800">SMS Notifications</span>
+          <span className="text-gray-800 font-medium">SMS Notifications</span>
           <ToggleSwitch />
         </div>
       </div>

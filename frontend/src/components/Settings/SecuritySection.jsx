@@ -12,25 +12,29 @@ const SecuritySection = () => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          strokeWidth="2"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 11c.667 0 1 .333 1 1m0-1v3m0-3a2.001 2.001 0 10-4 0v4m1.874 5h4.252M16 20H8a2 2 0 01-2-2V9a2 2 0 012-2h8a2 2 0 012 2v9a2 2 0 01-2 2z"
+            d="M12 17c1.104 0 2-.896 2-2v-1.5a2 2 0 00-4 0V15c0 1.104.896 2 2 2zm7-6v6c0 2.21-1.79 4-4 4H9c-2.21 0-4-1.79-4-4v-6a4 4 0 014-4h6a4 4 0 014 4zM9 7V5a3 3 0 016 0v2"
           />
         </svg>
       }
     >
       <div className="space-y-4">
+        {/* Two-Factor Authentication Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-gray-800">Two-Factor Authentication</span>
+          <span className="text-gray-800 font-medium">
+            Two-Factor Authentication
+          </span>
           <input
             type="checkbox"
-            className="w-6 h-6 text-blue-500 rounded-full focus:ring focus:ring-blue-300"
+            className="toggle-checkbox w-6 h-6 text-blue-500 rounded-full focus:ring focus:ring-blue-300"
           />
         </div>
-        <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+        {/* Change Password Button */}
+        <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
           Change Password
         </button>
       </div>

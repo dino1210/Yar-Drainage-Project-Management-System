@@ -17,14 +17,14 @@ const ProfileSection = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
-            d="M5.121 17.804A4 4 0 117.804 5.121m6.367 0a4 4 0 112.683 12.683M8 17.5v2a2 2 0 002 2h4a2 2 0 002-2v-2"
+            d="M12 12c2.209 0 4-1.791 4-4S14.209 4 12 4 8 5.791 8 8s1.791 4 4 4zM12 14c-4.418 0-8 2.686-8 6h16c0-3.314-3.582-6-8-6z"
           />
         </svg>
       }
     >
       <div className="flex items-center space-x-4">
         <img
-          src="https://via.placeholder.com/60"
+          src="src/assets/images/angelo.jpg"
           alt="Profile"
           className="w-16 h-16 rounded-full"
         />
