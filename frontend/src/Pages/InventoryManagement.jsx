@@ -36,7 +36,25 @@ const InventoryManagement = () => {
     },
   ]);
 
+  const [filteredItems, setFilteredItems] = useState(items);
+  const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
+
+  const handleSearch = (e) => {
+    const lowerSearch = e.target.value.toLowerCase();
+    setSearch(lowerSearch);
+
+    const newFilteredItems = items.map((category) => ({
+      ...category,
+      items: category.items.filter(
+        (item) =>
+          item.description.toLowerCase().includes(lowerSearch) ||
+          item.tag.toLowerCase().includes(lowerSearch)
+      ),
+    }));
+
+    setFilteredItems(newFilteredItems);
+  };
 
   const handleAddItem = (newItem) => {
     const updatedItems = [...items];
@@ -54,21 +72,36 @@ const InventoryManagement = () => {
     }
 
     setItems(updatedItems);
+    setFilteredItems(updatedItems); // Ensure filteredItems is updated as well
     setShowModal(false);
   };
 
   return (
     <div className="p-6 bg-gray-100">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Inventory Management</h1>
+      {/* Title */}
+      <h1 className="text-2xl font-bold mb-4">Inventory Management</h1>
+
+      {/* Search and Add New Item Section */}
+      <div className="flex items-center mb-6 space-x-4">
+        <input
+          type="text"
+          value={search}
+          onChange={handleSearch}
+          placeholder="Search items..."
+          className="flex-1 px-4 py-2 border rounded shadow-sm"
+        />
         <button
           onClick={() => setShowModal(true)}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 shadow h-full"
         >
           Add New Item
         </button>
       </div>
-      <InventoryTable data={items} />
+
+      {/* Inventory Table */}
+      <InventoryTable data={filteredItems} />
+
+      {/* Add Inventory Modal */}
       {showModal && (
         <AddInventoryModal
           onClose={() => setShowModal(false)}
