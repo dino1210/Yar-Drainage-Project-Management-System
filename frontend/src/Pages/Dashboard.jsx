@@ -46,7 +46,7 @@ const Dashboard = () => {
   } = data;
 
   return (
-    <div className="space-y-8 px-4 md:px-8">
+    <div className="space-y-8 px-7  md:px-8">
       <div className="flex flex-col gap-8">
         {/* Metrics Section */}
         <MetricsSection
@@ -78,15 +78,7 @@ const Dashboard = () => {
                 </Link>
               ),
             },
-            {
-              label: "Settings",
-              value: `$${totalSales}`,
-              icon: (
-                <Link to="/settings">
-                  <FaCog className="text-gray-500 text-5xl cursor-pointer hover:text-gray-700 transition-all" />
-                </Link>
-              ),
-            },
+           
             {
               label: "Reports",
               value: "N/A", // You can update this if reports data is available
