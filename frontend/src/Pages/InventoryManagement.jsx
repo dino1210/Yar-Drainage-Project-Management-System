@@ -92,7 +92,7 @@ const InventoryManagement = () => {
         />
         <button
           onClick={() => setShowModal(true)}
-          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 shadow h-full"
+          className="px-6 py-2 bg-[#800020] text-white rounded hover:bg-[#800020] shadow h-full"
         >
           Add New Item
         </button>
