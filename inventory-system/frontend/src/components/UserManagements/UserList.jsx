@@ -6,10 +6,10 @@ const UserList = ({ users }) => {
     <table className="w-full text-left border-collapse table-fixed">
       <thead>
         <tr>
-          <th className="border-b p-4 w-1/4">Name</th>
-          <th className="border-b p-4 w-1/4">Role</th>
-          <th className="border-b p-4 w-1/4">Email</th>
-          <th className="border-b p-4 w-1/4">Actions</th>
+        <th className="border-b px-4 py-2 text-left w-1/5">Username</th>
+        <th className="border-b px-4 py-2 text-left w-2/5">Full Name</th>
+        <th className="border-b px-4 py-2 text-left w-2/5">Email</th>
+
         </tr>
       </thead>
       <tbody>
