@@ -23,23 +23,22 @@ const NotificationsSection = () => {
         </svg>
       }
     >
-      <div className="space-y-4">
-        {/* Push Notifications Toggle */}
-        <div className="flex items-center justify-between">
-          <span className="text-gray-800 font-medium">Push Notifications</span>
-          <ToggleSwitch />
-        </div>
-        {/* Email Notifications Toggle */}
-        <div className="flex items-center justify-between">
-          <span className="text-gray-800 font-medium">Email Notifications</span>
-          <ToggleSwitch />
-        </div>
-        {/* SMS Notifications Toggle */}
-        <div className="flex items-center justify-between">
-          <span className="text-gray-800 font-medium">SMS Notifications</span>
-          <ToggleSwitch />
-        </div>
-      </div>
+     <div className="space-y-6">
+  <h3 className="text-gray-800 font-semibold">Manage Notifications</h3>
+  <div className="flex items-center justify-between">
+    <span className="text-gray-800">Push Notifications</span>
+    <ToggleSwitch />
+  </div>
+  <div className="flex items-center justify-between">
+    <span className="text-gray-800">Email Notifications</span>
+    <ToggleSwitch />
+  </div>
+  <div className="flex items-center justify-between">
+    <span className="text-gray-800">SMS Notifications</span>
+    <ToggleSwitch />
+  </div>
+</div>
+
     </SettingsCard>
   );
 };
