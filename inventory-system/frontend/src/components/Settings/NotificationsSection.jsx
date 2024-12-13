@@ -24,7 +24,7 @@ const NotificationsSection = () => {
       }
     >
      <div className="space-y-6">
-  <h3 className="text-gray-800 font-semibold">Manage Notifications</h3>
+  
   <div className="flex items-center justify-between">
     <span className="text-gray-800">Push Notifications</span>
     <ToggleSwitch />
