@@ -68,52 +68,50 @@ const UserManagement = () => {
       </div>
 
       {/* User Table */}
-      <div className="bg-white rounded-lg p-2 shadow-md">
-        <div className="mt-3 bg-white rounded-lg shadow-sm mx-auto p-5">
-          <table className="min-w-full table-auto text-xs text-gray-600">
-            <thead>
-              <tr>
-                <th className="border-b px-4 py-2">Username</th>
-                <th className="border-b px-4 py-2">Full Name</th>
-                <th className="border-b px-4 py-2">Email</th>
-                <th className="border-b px-4 py-2">Role</th>
-                <th className="border-b px-4 py-2">Status</th>
-                <th className="border-b px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users
-                .filter(
-                  (user) =>
-                    user.username.toLowerCase().includes(search) ||
-                    user.fullName.toLowerCase().includes(search) ||
-                    user.email.toLowerCase().includes(search)
-                )
-                .map((user) => (
-                  <tr key={user.id}>
-                    <td className="border-b px-4 py-2">{user.username}</td>
-                    <td className="border-b px-4 py-2">{user.fullName}</td>
-                    <td className="border-b px-4 py-2">{user.email}</td>
-                    <td className="border-b px-4 py-2">{user.role}</td>
-                    <td className="border-b px-4 py-2">{user.status}</td>
-                    <td className="border-b px-4 py-2 text-center">
-                      <button className="bg-yellow-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
-                        Edit
-                      </button>
-                      <button className="bg-red-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
-                        Delete
-                      </button>
-                      <button className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
-                        {user.status === "Active" ? "Deactivate" : "Activate"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      <div className="bg-white rounded-lg shadow-md p-5">
+  <table className="min-w-full table-auto text-xs text-gray-600">
+    <thead>
+      <tr>
+        <th className="border-b px-4 py-2 text-left">Username</th>
+        <th className="border-b px-4 py-2 text-left">Full Name</th>
+        <th className="border-b px-4 py-2 text-left">Email</th>
+        <th className="border-b px-4 py-2 text-left">Role</th>
+        <th className="border-b px-4 py-2 text-left">Status</th>
+        <th className="border-b px-4 py-2 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {users
+        .filter(
+          (user) =>
+            user.username.toLowerCase().includes(search) ||
+            user.fullName.toLowerCase().includes(search) ||
+            user.email.toLowerCase().includes(search)
+        )
+        .map((user) => (
+          <tr key={user.id}>
+            <td className="border-b px-4 py-2 text-left">{user.username}</td>
+            <td className="border-b px-4 py-2 text-left">{user.fullName}</td>
+            <td className="border-b px-4 py-2 text-left">{user.email}</td>
+            <td className="border-b px-4 py-2 text-left">{user.role}</td>
+            <td className="border-b px-4 py-2 text-left">{user.status}</td>
+            <td className="border-b px-4 py-2 text-center">
+              <button className="bg-yellow-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
+                Edit
+              </button>
+              <button className="bg-red-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
+                Delete
+              </button>
+              <button className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
+                {user.status === "Active" ? "Deactivate" : "Activate"}
+              </button>
+            </td>
+          </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
+</div>
   );
 };
 
