@@ -95,15 +95,16 @@ const Check = () => {
         <div className="mt-3 bg-white rounded-lg shadow-sm mx-auto p-5">
           <table className="min-w-full table-auto text-xs text-gray-600">
             <thead>
-              <tr>
-                <th className="border-b px-4 py-2">Item Code</th>
-                <th className="border-b px-4 py-2">Description</th>
-                <th className="border-b px-4 py-2">Location</th>
-                <th className="border-b px-4 py-2">Available Quantity</th>
-                <th className="border-b px-4 py-2">Checked Out</th>
-                <th className="border-b px-4 py-2">Checked In</th>
-                <th className="border-b px-4 py-2">Actions</th>
-              </tr>
+            <tr>
+  <th className="border-b px-4 py-3 text-left">Item Code</th>
+  <th className="border-b px-4 py-3 text-left">Description</th>
+  <th className="border-b px-4 py-3 text-left">Location</th>
+  <th className="border-b px-4 py-3 text-left">Available Quantity</th>
+  <th className="border-b px-4 py-3 text-left">Checked Out</th>
+  <th className="border-b px-4 py-3 text-left">Checked In</th>
+  <th className="border-b px-4 py-3 text-left">Actions</th>
+</tr>
+
             </thead>
             <tbody>
               {data
