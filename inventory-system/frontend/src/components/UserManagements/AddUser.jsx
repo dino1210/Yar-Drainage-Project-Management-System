@@ -1,94 +1,52 @@
 import React, { useState } from "react";
+import AddUser from "./AddUser";
 
-const AddUser = ({ onAddUser, onClose }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("Staff");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+const App = () => {
+  const [users, setUsers] = useState([]); // State to hold the list of users
+  const [showModal, setShowModal] = useState(false); // State to show/hide the modal
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleAddUser = (newUser) => {
+    console.log("Adding user:", newUser); // Debugging log
+    setUsers((prevUsers) => [...prevUsers, newUser]); // Add new user to the list
+    setShowModal(false); // Close modal after adding
+  };
 
-    // Validate inputs
-    if (!name || !email || !role) {
-      setError("Please fill out all fields.");
-      return;
-    }
-
-    setError("");
-    setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      onAddUser({ name, email, role });
-      setIsSubmitting(false);
-    }, 1000);
+  const handleCloseModal = () => {
+    setShowModal(false); // Close the modal
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow-lg w-96 animate-fadeIn">
-        <h2 className="text-xl font-bold mb-4">Add New User</h2>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">User Management</h1>
 
-        {/* Error Message */}
-        {error && <div className="text-red-500 mb-2">{error}</div>}
+      {/* Add User Button */}
+      <button
+        onClick={() => setShowModal(true)}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Add User
+      </button>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block font-medium">Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block font-medium">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block font-medium">Role</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="Admin">Admin</option>
-              <option value="Staff">Staff</option>
-            </select>
-          </div>
+      {/* Modal for Adding User */}
+      {showModal && (
+        <AddUser onAddUser={handleAddUser} onClose={handleCloseModal} />
+      )}
 
-          {/* Buttons */}
-          <div className="flex justify-end space-x-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Adding..." : "Add User"}
-            </button>
-          </div>
-        </form>
-      </div>
+      {/* User List */}
+      <h2 className="text-xl font-bold mt-6">Users</h2>
+      <ul className="mt-4">
+        {users.length > 0 ? (
+          users.map((user, index) => (
+            <li key={index} className="p-2 border-b">
+              {user.name} - {user.email} - {user.role}
+            </li>
+          ))
+        ) : (
+          <li className="p-2 text-gray-500">No users added yet.</li>
+        )}
+      </ul>
     </div>
   );
 };
 
-export default AddUser;
+export default App;
