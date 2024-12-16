@@ -118,17 +118,18 @@ const InventoryManagement = () => {
         <div className="mt-3 bg-white rounded-lg shadow-sm mx-auto p-5">
           <table className="min-w-full table-auto text-xs text-gray-600">
             <thead>
-              <tr>
-                <th className="border-b px-4 py-2">Item Code</th>
-                <th className="border-b px-4 py-2">Description</th>
-                <th className="border-b px-4 py-2">Location</th>
-                <th className="border-b px-4 py-2">Beginning</th>
-                <th className="border-b px-4 py-2">Balance</th>
-                <th className="border-b px-4 py-2">Unit</th>
-                <th className="border-b px-4 py-2">Required Quantity</th>
-                <th className="border-b px-4 py-2">Status</th>
-                <th className="border-b px-4 py-2">Actions</th>
-              </tr>
+            <tr>
+  <th className="border-b px-4 py-2 text-left">Item Code</th>
+  <th className="border-b px-4 py-2 text-left">Description</th>
+  <th className="border-b px-4 py-2 text-left">Location</th>
+  <th className="border-b px-4 py-2 text-left">Beginning</th>
+  <th className="border-b px-4 py-2 text-left">Balance</th>
+  <th className="border-b px-4 py-2 text-left">Unit</th>
+  <th className="border-b px-4 py-2 text-left">Required Quantity</th>
+  <th className="border-b px-4 py-2 text-center">Status</th>
+  <th className="border-b px-4 py-2 text-center">Actions</th>
+</tr>
+
             </thead>
             <tbody>
               {data.map((item, index) => (

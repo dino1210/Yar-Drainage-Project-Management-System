@@ -36,7 +36,8 @@ const AddInventory = ({ onClose, onSave }) => {
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded shadow-md w-2/3">
-        <h2 className="text-xl font-bold mb-4">Add New Inventory Item</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-700 text-left">Add New Inventory Item</h2>
+
         <div className="space-y-4">
           <input
             name="category"
