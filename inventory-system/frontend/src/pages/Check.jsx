@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
+import QRCode from "react-qr-code";
 
 const Check = () => {
+  // Data for inventory items
   const data = [
     {
       itemCode: "DISC-001",
@@ -61,18 +63,30 @@ const Check = () => {
     },
   ];
 
+  // State for search input and selected QR code item
   const [search, setSearch] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-    setSearch(value);
+  // Update search value
+  const handleSearch = (event) => {
+    setSearch(event.target.value.toLowerCase());
+  };
+
+  // Show QR Code for selected item
+  const handleShowQRCode = (item) => {
+    setSelectedItem(item);
+  };
+
+  // Close QR Code modal
+  const handleCloseQRCode = () => {
+    setSelectedItem(null);
   };
 
   return (
     <div className="container mx-auto p-2 text-xs">
-      {/* Search and Add New Section */}
-      <div className="bg-white rounded-lg p-2 shadow-md mb-2">
-        <div className="flex flex-wrap space-x-4 items-center">
+      {/* Search and Add Section */}
+      <div className="bg-white rounded-lg p-2 shadow-md mb-4">
+        <div className="flex items-center space-x-4">
           <Search className="text-gray-500" />
           <input
             type="text"
@@ -82,64 +96,83 @@ const Check = () => {
             onChange={handleSearch}
           />
           <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xs py-2 px-4 rounded-lg"
             onClick={() => {}}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-xs py-3 px-4 rounded-lg"
           >
             Add Product
           </button>
         </div>
       </div>
 
-      {/* Check-In/Check-Out Table */}
+      {/* Inventory Table */}
       <div className="bg-white rounded-lg p-2 shadow-md">
-        <div className="mt-3 bg-white rounded-lg shadow-sm mx-auto p-5">
-          <table className="min-w-full table-auto text-xs text-gray-600">
-            <thead>
+        <table className="min-w-full table-auto text-xs text-gray-600">
+          <thead>
             <tr>
-  <th className="border-b px-4 py-3 text-left">Item Code</th>
-  <th className="border-b px-4 py-3 text-left">Description</th>
-  <th className="border-b px-4 py-3 text-left">Location</th>
-  <th className="border-b px-4 py-3 text-left">Available Quantity</th>
-  <th className="border-b px-4 py-3 text-left">Checked Out</th>
-  <th className="border-b px-4 py-3 text-left">Checked In</th>
-  <th className="border-b px-4 py-3 text-left">Actions</th>
-</tr>
+              <th className="border-b px-4 py-2 text-left">Item Code</th>
+              <th className="border-b px-4 py-2 text-left">Description</th>
+              <th className="border-b px-4 py-2 text-left">Location</th>
+              <th className="border-b px-4 py-2 text-left">Available Qty</th>
+              <th className="border-b px-4 py-2 text-left">Checked Out</th>
+              <th className="border-b px-4 py-2 text-left">Checked In</th>
+              <th className="border-b px-4 py-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data
+              .filter(
+                (item) =>
+                  item.itemCode.toLowerCase().includes(search) ||
+                  item.description.toLowerCase().includes(search)
+              )
+              .map((item, index) => (
+                <tr key={index}>
+                  <td className="border-b px-4 py-2">{item.itemCode}</td>
+                  <td className="border-b px-4 py-2">{item.description}</td>
+                  <td className="border-b px-4 py-2">{item.location}</td>
+                  <td className="border-b px-4 py-2">
+                    {item.quantityAvailable}
+                  </td>
+                  <td className="border-b px-4 py-2">
+                    {item.quantityCheckedOut}
+                  </td>
+                  <td className="border-b px-4 py-2">
+                    {item.quantityCheckedIn}
+                  </td>
+                  <td className="border-b px-4 py-2 text-center">
+                    <button className="bg-green-500 text-white px-2 py-1 rounded-lg text-xs">
+                      Check In
+                    </button>
+                    <button className="bg-yellow-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
+                      Check Out
+                    </button>
+                    <button
+                      className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs ml-2"
+                      onClick={() => handleShowQRCode(item)}
+                    >
+                      Show QR Code
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
-            </thead>
-            <tbody>
-              {data
-                .filter(
-                  (item) =>
-                    item.itemCode.toLowerCase().includes(search) ||
-                    item.description.toLowerCase().includes(search)
-                )
-                .map((item, index) => (
-                  <tr key={index}>
-                    <td className="border-b px-4 py-2">{item.itemCode}</td>
-                    <td className="border-b px-4 py-2">{item.description}</td>
-                    <td className="border-b px-4 py-2">{item.location}</td>
-                    <td className="border-b px-4 py-2">
-                      {item.quantityAvailable}
-                    </td>
-                    <td className="border-b px-4 py-2">
-                      {item.quantityCheckedOut}
-                    </td>
-                    <td className="border-b px-4 py-2">
-                      {item.quantityCheckedIn}
-                    </td>
-                    <td className="border-b px-4 py-2 text-center">
-                      <button className="bg-green-500 text-white px-2 py-1 rounded-lg text-xs">
-                        Check In
-                      </button>
-                      <button className="bg-yellow-500 text-white px-2 py-1 rounded-lg text-xs ml-2">
-                        Check Out
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+        {/* QR Code Modal */}
+        {selectedItem && (
+          <div className="mt-4">
+            <h2 className="text-lg font-bold">
+              QR Code for {selectedItem.itemCode}
+            </h2>
+            <QRCode value={JSON.stringify(selectedItem)} />
+            <button
+              className="bg-red-500 text-white px-2 py-1 rounded-lg text-xs mt-2"
+              onClick={handleCloseQRCode}
+            >
+              Close
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
