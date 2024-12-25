@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 
 const Dashboard = () => {
   const [alerts, setAlerts] = useState([]);
+  const [inventoryStats, setInventoryStats] = useState({
+    totalItems: 150,
+    activeProjects: 12,
+    lowStockItems: 25,
+    pendingMaintenance: 8,
+  });
+  const [recentActivities, setRecentActivities] = useState([
+    { activity: "Checked out equipment for Project A", time: "2 hours ago" },
+    { activity: "Updated maintenance schedule for Site B", time: "Yesterday" },
+    { activity: "Added new drainage data for Region C", time: "2 days ago" },
+  ]);
 
   useEffect(() => {
     // Example fetching alerts (replace with real API call)
@@ -16,56 +27,49 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col p-6 space-y-6 bg-gray-50 min-h-screen">
-      {/* Header */}
-      <header className="flex justify-between items-center bg-white p-6 shadow-sm rounded-lg">
-        <div className="flex space-x-4">
-        </div>
-      </header>
+    <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
 
-      {/* Summary Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 shadow-sm rounded-lg">
-          <h2 className="text-sm font-medium text-gray-500">
-            Total Drainage Systems
-          </h2>
-          <p className="text-2xl font-semibold text-blue-600">150</p>
+      {/* Summary Section */}
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="bg-gray-200 text-gray-700 p-4 rounded-lg shadow-md">
+            <p className="text-sm font-semibold">Total Inventory Items</p>
+            <p className="text-xl font-bold">{inventoryStats.totalItems}</p>
+          </div>
+          <div className="bg-green-200 text-green-700 p-4 rounded-lg shadow-md">
+            <p className="text-sm font-semibold">Active Projects</p>
+            <p className="text-xl font-bold">{inventoryStats.activeProjects}</p>
+          </div>
+          <div className="bg-orange-200 text-orange-700 p-4 rounded-lg shadow-md">
+            <p className="text-sm font-semibold">Low Stock Items</p>
+            <p className="text-xl font-bold">{inventoryStats.lowStockItems}</p>
+          </div>
+          <div className="bg-red-200 text-red-700 p-4 rounded-lg shadow-md">
+            <p className="text-sm font-semibold">Pending Maintenance</p>
+            <p className="text-xl font-bold">
+              {inventoryStats.pendingMaintenance}
+            </p>
+          </div>
         </div>
-        <div className="bg-white p-6 shadow-sm rounded-lg">
-          <h2 className="text-sm font-medium text-gray-500">Active Projects</h2>
-          <p className="text-2xl font-semibold text-green-600">12</p>
-        </div>
-        <div className="bg-white p-6 shadow-sm rounded-lg">
-          <h2 className="text-sm font-medium text-gray-500">
-            Pending Maintenance
-          </h2>
-          <p className="text-2xl font-semibold text-red-600">8</p>
-        </div>
-      </section>
+      </div>
 
       {/* Recent Activities */}
-      <section className="bg-white p-6 shadow-sm rounded-lg">
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Recent Activities
         </h2>
         <ul className="divide-y divide-gray-200">
-          <li className="flex justify-between items-center py-2">
-            <span>Checked out equipment for Project A</span>
-            <span className="text-sm text-gray-500">2 hours ago</span>
-          </li>
-          <li className="flex justify-between items-center py-2">
-            <span>Updated maintenance schedule for Site B</span>
-            <span className="text-sm text-gray-500">Yesterday</span>
-          </li>
-          <li className="flex justify-between items-center py-2">
-            <span>Added new drainage data for Region C</span>
-            <span className="text-sm text-gray-500">2 days ago</span>
-          </li>
+          {recentActivities.map((activity, index) => (
+            <li key={index} className="flex justify-between items-center py-2">
+              <span>{activity.activity}</span>
+              <span className="text-sm text-gray-500">{activity.time}</span>
+            </li>
+          ))}
         </ul>
-      </section>
+      </div>
 
-      {/* Alerts Section */}
-      <section className="bg-white p-6 shadow-sm rounded-lg">
+      {/* Notifications Section */}
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Notifications
         </h2>
@@ -83,10 +87,10 @@ const Dashboard = () => {
             </li>
           ))}
         </ul>
-      </section>
+      </div>
 
       {/* Quick Actions */}
-      <section className="bg-white p-6 shadow-sm rounded-lg">
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Quick Actions
         </h2>
@@ -104,7 +108,17 @@ const Dashboard = () => {
             Alert Issue
           </button>
         </div>
-      </section>
+      </div>
+
+      {/* Inventory Chart (Placeholder for now) */}
+      <div className="bg-white rounded-lg p-4 shadow-md">
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">
+          Inventory Overview
+        </h2>
+        <div className="flex justify-center items-center h-40 bg-gray-50 border border-gray-200 rounded-lg">
+          <span className="text-gray-400">Chart Placeholder</span>
+        </div>
+      </div>
     </div>
   );
 };
