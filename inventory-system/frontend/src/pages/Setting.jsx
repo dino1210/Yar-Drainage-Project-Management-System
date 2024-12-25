@@ -8,7 +8,7 @@ import DangerZone from "../components/Settings/DangerZone";
 const Setting = () => {
   return (
     <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-700 mb-6">Settings</h1>
+     
 
       {/* Profile Section */}
       <div className="bg-white rounded-lg p-4 shadow-md mb-6">
