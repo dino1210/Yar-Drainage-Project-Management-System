@@ -33,7 +33,16 @@ const ProfileSection = () => {
           <p className="text-gray-500">angelitojerichorosales@example.com</p>
         </div>
       </div>
-      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+      <div className="mt-4 space-y-2 text-gray-600">
+        <p>
+          <span className="font-medium text-gray-800">Phone:</span> +63 987654321
+        </p>
+        <p>
+          <span className="font-medium text-gray-800">Designation:</span> Project Manager
+        </p>
+       
+      </div>
+      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg transition-all duration-300 ease-in-out hover:bg-blue-600 hover:shadow-lg">
         Edit Profile
       </button>
     </SettingsCard>

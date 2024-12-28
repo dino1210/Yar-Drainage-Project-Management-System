@@ -108,15 +108,16 @@ const Check = () => {
       <div className="bg-white rounded-lg p-2 shadow-md">
         <table className="min-w-full table-auto text-xs text-gray-600">
           <thead>
-            <tr>
-              <th className="border-b px-4 py-2 text-left">Item Code</th>
-              <th className="border-b px-4 py-2 text-left">Description</th>
-              <th className="border-b px-4 py-2 text-left">Location</th>
-              <th className="border-b px-4 py-2 text-left">Available Qty</th>
-              <th className="border-b px-4 py-2 text-left">Checked Out</th>
-              <th className="border-b px-4 py-2 text-left">Checked In</th>
-              <th className="border-b px-4 py-2 text-left">Actions</th>
-            </tr>
+          <tr>
+  <th className="border-b px-4 py-2 text-left">Item Code</th>
+  <th className="border-b px-4 py-2 text-left">Description</th>
+  <th className="border-b px-4 py-2 text-left">Location</th>
+  <th className="border-b px-4 py-2 text-left">Available Qty</th>
+  <th className="border-b px-4 py-2 text-left">Checked Out</th>
+  <th className="border-b px-4 py-2 text-left">Checked In</th>
+  <th className="border-b px-4 py-2 text-center">Actions</th> {/* Use text-center for better alignment */}
+</tr>
+
           </thead>
           <tbody>
             {data

@@ -89,7 +89,7 @@ const Reports = () => {
               <th className="border-b px-4 py-3 text-left">Balance</th>
               <th className="border-b px-4 py-3 text-left">Required</th>
               <th className="border-b px-4 py-3 text-left">Status</th>
-              <th className="border-b px-4 py-3 text-left">Actions</th>
+              <th className="border-b px-4 py-2 text-center">Actions</th> 
             </tr>
           </thead>
           <tbody>
