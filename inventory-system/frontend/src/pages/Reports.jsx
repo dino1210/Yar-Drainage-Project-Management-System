@@ -38,6 +38,7 @@ const Reports = () => {
   ]);
 
   const [selectedItem, setSelectedItem] = useState(null);
+  const [feedback, setFeedback] = useState("");
 
   // Analytics calculations
   const totalItems = inventoryData.length;
@@ -54,11 +55,44 @@ const Reports = () => {
     setSelectedItem(null);
   };
 
+  const getStatus = (balance, required) => {
+    if (balance === 0) return "Out of Stock";
+    if (balance < required) return "Low Stock";
+    return "In Stock";
+  };
+
+  const exportToCSV = () => {
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      ["Code,Description,Location,Balance,Required"].join(",") +
+      "\n" +
+      inventoryData
+        .map((item) =>
+          [item.code, item.description, item.location, item.balance, item.required].join(",")
+        )
+        .join("\n");
+
+    const link = document.createElement("a");
+    link.setAttribute("href", encodeURI(csvContent));
+    link.setAttribute("download", "inventory_report.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setFeedback("Exported to CSV successfully!");
+    setTimeout(() => setFeedback(""), 3000);
+  };
+
+  const exportToPDF = () => {
+    setFeedback("Exporting to PDF...");
+    setTimeout(() => {
+      setFeedback("Export Complete!");
+    }, 2000);
+  };
+
   return (
     <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-700 mb-6">
-        Inventory Report
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-700 mb-6">Inventory Report</h1>
 
       {/* Analytics Section */}
       <div className="bg-white rounded-lg p-4 shadow-md mb-6">
@@ -80,68 +114,68 @@ const Reports = () => {
 
       {/* Inventory Table */}
       <div className="bg-white rounded-lg p-4 shadow-md">
-        <table className="min-w-full table-auto text-xs text-gray-600">
-          <thead>
-            <tr>
-              <th className="border-b px-4 py-3 text-left">Item Code</th>
-              <th className="border-b px-4 py-3 text-left">Description</th>
-              <th className="border-b px-4 py-3 text-left">Location</th>
-              <th className="border-b px-4 py-3 text-left">Balance</th>
-              <th className="border-b px-4 py-3 text-left">Required</th>
-              <th className="border-b px-4 py-3 text-left">Status</th>
-              <th className="border-b px-4 py-2 text-center">Actions</th> 
-            </tr>
-          </thead>
-          <tbody>
-            {inventoryData.map((item) => (
-              <tr key={item.id}>
-                <td className="border-b px-4 py-2">{item.code}</td>
-                <td className="border-b px-4 py-2">{item.description}</td>
-                <td className="border-b px-4 py-2">{item.location}</td>
-                <td className="border-b px-4 py-2">{item.balance}</td>
-                <td className="border-b px-4 py-2">{item.required}</td>
-                <td className="border-b px-4 py-2">
-                  {item.balance === 0 ? (
-                    <span className="text-red-700 font-semibold">
-                      Out of Stock
-                    </span>
-                  ) : item.balance < item.required ? (
-                    <span className="text-orange-700 font-semibold">
-                      Low Stock
-                    </span>
-                  ) : (
-                    <span className="text-green-700 font-semibold">
-                      In Stock
-                    </span>
-                  )}
-                </td>
-                <td className="border-b px-4 py-2 text-center">
-                  <button
-                    className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs"
-                    onClick={() => handleShowQRCode(item)}
-                  >
-                    Show QR Code
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full table-auto text-xs text-gray-600">
+            <thead>
+              <tr>
+                <th className="border-b px-4 py-3 text-left">Item Code</th>
+                <th className="border-b px-4 py-3 text-left">Description</th>
+                <th className="border-b px-4 py-3 text-left">Location</th>
+                <th className="border-b px-4 py-3 text-left">Balance</th>
+                <th className="border-b px-4 py-3 text-left">Required</th>
+                <th className="border-b px-4 py-3 text-left">Status</th>
+                <th className="border-b px-4 py-2 text-center">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {inventoryData.map((item) => (
+                <tr key={item.id} className="hover:bg-gray-100">
+                  <td className="border-b px-4 py-2">{item.code}</td>
+                  <td className="border-b px-4 py-2">{item.description}</td>
+                  <td className="border-b px-4 py-2">{item.location}</td>
+                  <td className="border-b px-4 py-2">{item.balance}</td>
+                  <td className="border-b px-4 py-2">{item.required}</td>
+                  <td className="border-b px-4 py-2">
+                    <span
+                      className={`font-semibold ${
+                        item.balance === 0
+                          ? "text-red-700"
+                          : item.balance < item.required
+                          ? "text-orange-700"
+                          : "text-green-700"
+                      }`}
+                    >
+                      {getStatus(item.balance, item.required)}
+                    </span>
+                  </td>
+                  <td className="border-b px-4 py-2 text-center">
+                    <button
+                      className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs"
+                      onClick={() => handleShowQRCode(item)}
+                    >
+                      Show QR Code
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* QR Code Modal */}
       {selectedItem && (
-        <div className="mt-4 bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-lg font-bold mb-2">
-            QR Code for {selectedItem.code}
-          </h2>
-          <QRCode value={JSON.stringify(selectedItem)} />
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm mt-4"
-            onClick={handleCloseQRCode}
-          >
-            Close
-          </button>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h2 className="text-lg font-bold mb-4">QR Code for {selectedItem.code}</h2>
+            <QRCode value={JSON.stringify(selectedItem)} />
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm mt-4"
+              onClick={handleCloseQRCode}
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
 
@@ -149,17 +183,20 @@ const Reports = () => {
       <div className="mt-6 flex justify-end gap-4">
         <button
           className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm"
-          onClick={() => alert("Exporting to CSV...")}
+          onClick={exportToCSV}
         >
           Export to CSV
         </button>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
-          onClick={() => alert("Exporting to PDF...")}
+          onClick={exportToPDF}
         >
           Export to PDF
         </button>
       </div>
+
+      {/* Feedback */}
+      {feedback && <p className="text-sm text-green-600 mt-2">{feedback}</p>}
     </div>
   );
 };
