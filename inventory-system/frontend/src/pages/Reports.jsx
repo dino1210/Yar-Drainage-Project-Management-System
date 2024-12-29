@@ -39,6 +39,12 @@ const Reports = () => {
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [feedback, setFeedback] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filtered Data
+  const filteredData = inventoryData.filter((item) =>
+    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // Analytics calculations
   const totalItems = inventoryData.length;
@@ -83,33 +89,41 @@ const Reports = () => {
     setTimeout(() => setFeedback(""), 3000);
   };
 
-  const exportToPDF = () => {
-    setFeedback("Exporting to PDF...");
-    setTimeout(() => {
-      setFeedback("Export Complete!");
-    }, 2000);
-  };
-
   return (
     <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-700 mb-6">Inventory Report</h1>
 
+      {/* Search Bar */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search items..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full p-2 rounded-lg border border-gray-300"
+        />
+      </div>
+
       {/* Analytics Section */}
-      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
-        <div className="flex justify-between items-center">
-          <div className="bg-gray-200 text-gray-700 p-4 rounded-lg shadow-md">
-            <p className="text-sm font-semibold">Total Items</p>
-            <p className="text-xl font-bold">{totalItems}</p>
-          </div>
-          <div className="bg-orange-200 text-orange-700 p-4 rounded-lg shadow-md">
-            <p className="text-sm font-semibold">Low Stock</p>
-            <p className="text-xl font-bold">{lowStockItems.length}</p>
-          </div>
-          <div className="bg-red-200 text-red-700 p-4 rounded-lg shadow-md">
-            <p className="text-sm font-semibold">Out of Stock</p>
-            <p className="text-xl font-bold">{outOfStockItems.length}</p>
-          </div>
-        </div>
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <AnalyticsCard
+          title="Total Items"
+          value={totalItems}
+          bgColor="bg-gray-200"
+          textColor="text-gray-700"
+        />
+        <AnalyticsCard
+          title="Low Stock"
+          value={lowStockItems.length}
+          bgColor="bg-orange-200"
+          textColor="text-orange-700"
+        />
+        <AnalyticsCard
+          title="Out of Stock"
+          value={outOfStockItems.length}
+          bgColor="bg-red-200"
+          textColor="text-red-700"
+        />
       </div>
 
       {/* Inventory Table */}
@@ -128,7 +142,7 @@ const Reports = () => {
               </tr>
             </thead>
             <tbody>
-              {inventoryData.map((item) => (
+              {filteredData.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-100">
                   <td className="border-b px-4 py-2">{item.code}</td>
                   <td className="border-b px-4 py-2">{item.description}</td>
@@ -187,12 +201,6 @@ const Reports = () => {
         >
           Export to CSV
         </button>
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
-          onClick={exportToPDF}
-        >
-          Export to PDF
-        </button>
       </div>
 
       {/* Feedback */}
@@ -200,5 +208,12 @@ const Reports = () => {
     </div>
   );
 };
+
+const AnalyticsCard = ({ title, value, bgColor, textColor }) => (
+  <div className={`p-4 rounded-lg shadow-md ${bgColor} ${textColor}`}>
+    <p className="text-sm font-semibold">{title}</p>
+    <p className="text-xl font-bold">{value}</p>
+  </div>
+);
 
 export default Reports;
