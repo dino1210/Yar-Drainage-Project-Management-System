@@ -115,7 +115,7 @@ const Check = () => {
   <th className="border-b px-4 py-2 text-left">Available Qty</th>
   <th className="border-b px-4 py-2 text-left">Checked Out</th>
   <th className="border-b px-4 py-2 text-left">Checked In</th>
-  <th className="border-b px-4 py-2 text-center">Actions</th> {/* Use text-center for better alignment */}
+  <th className="border-b px-4 py-2 text-center">Actions</th> 
 </tr>
 
           </thead>
