@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import QRCode from "react-qr-code";
 
+
 const Reports = () => {
   const [inventoryData, setInventoryData] = useState([
     {
@@ -86,6 +87,30 @@ const Reports = () => {
     document.body.removeChild(link);
 
     setFeedback("Exported to CSV successfully!");
+    setTimeout(() => setFeedback(""), 3000);
+  };
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Inventory Report", 10, 10);
+
+    // Add table header
+    doc.autoTable({
+      head: [["Item Code", "Description", "Location", "Balance", "Required", "Status"]],
+      body: inventoryData.map((item) => [
+        item.code,
+        item.description,
+        item.location,
+        item.balance,
+        item.required,
+        getStatus(item.balance, item.required),
+      ]),
+    });
+
+    // Save PDF
+    doc.save("inventory_report.pdf");
+
+    setFeedback("Exported to PDF successfully!");
     setTimeout(() => setFeedback(""), 3000);
   };
 
@@ -200,6 +225,12 @@ const Reports = () => {
           onClick={exportToCSV}
         >
           Export to CSV
+        </button>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm"
+          onClick={exportToPDF}
+        >
+          Export to PDF
         </button>
       </div>
 
