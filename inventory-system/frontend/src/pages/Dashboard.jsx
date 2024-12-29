@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from "react";
 
 const Dashboard = () => {
-  const [alerts, setAlerts] = useState([]);
+  const [alerts, setAlerts] = useState([
+    { message: "Low inventory on Drainage System A", type: "warning" },
+    { message: "Maintenance overdue for Site C", type: "error" },
+  ]);
+
   const [inventoryStats, setInventoryStats] = useState({
     totalItems: 150,
     activeProjects: 12,
     lowStockItems: 25,
     pendingMaintenance: 8,
   });
+
   const [recentActivities, setRecentActivities] = useState([
     { activity: "Checked out equipment for Project A", time: "2 hours ago" },
     { activity: "Updated maintenance schedule for Site B", time: "Yesterday" },
     { activity: "Added new drainage data for Region C", time: "2 days ago" },
   ]);
 
+  const [dateFilter, setDateFilter] = useState("Month to Date");
+
   useEffect(() => {
-    // Example fetching alerts (replace with real API call)
-    const fetchAlerts = async () => {
-      const data = [
-        { message: "Low inventory on Drainage System A", type: "warning" },
-        { message: "Maintenance overdue for Site C", type: "error" },
-      ];
-      setAlerts(data);
-    };
-    fetchAlerts();
+    // Placeholder for fetching alerts, stats, or activities via API in the future
   }, []);
+
+  const handleQuickAction = (action) => {
+    console.log(`${action} action triggered`);
+    // Placeholder for future backend integration
+  };
+
+  const handleDateFilterChange = (filter) => {
+    setDateFilter(filter);
+    console.log(`Date filter changed to: ${filter}`);
+    // Placeholder for filtering logic
+  };
 
   return (
     <div className="container mx-auto p-4 bg-gray-100 min-h-screen">
-
       {/* Summary Section */}
       <div className="bg-white rounded-lg p-4 shadow-md mb-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -95,29 +104,53 @@ const Dashboard = () => {
           Quick Actions
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            onClick={() => handleQuickAction("Add Equipment")}
+          >
             Add Equipment
           </button>
-          <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+          <button
+            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+            onClick={() => handleQuickAction("Schedule Maintenance")}
+          >
             Schedule Maintenance
           </button>
-          <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">
+          <button
+            className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600"
+            onClick={() => handleQuickAction("Generate Report")}
+          >
             Generate Report
           </button>
-          <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            onClick={() => handleQuickAction("Alert Issue")}
+          >
             Alert Issue
           </button>
         </div>
       </div>
 
-      {/* Inventory Chart (Placeholder for now) */}
-      <div className="bg-white rounded-lg p-4 shadow-md">
+      {/* Placeholder for Equipment Utilization */}
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Inventory Overview
+          Equipment Utilization
         </h2>
-        <div className="flex justify-center items-center h-40 bg-gray-50 border border-gray-200 rounded-lg">
-          <span className="text-gray-400">Chart Placeholder</span>
-        </div>
+        <p className="text-gray-600 text-sm">
+          Checked-In: 120 | Checked-Out: 30 | Idle: 20
+        </p>
+      </div>
+
+      {/* Placeholder for Upcoming Maintenance */}
+      <div className="bg-white rounded-lg p-4 shadow-md mb-6">
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">
+          Upcoming Maintenance
+        </h2>
+        <ul className="list-disc list-inside text-sm text-gray-600">
+          <li>Drainage Pump A - Due in 3 days</li>
+          <li>Generator B - Due in 7 days</li>
+          <li>Excavator C - Due in 10 days</li>
+        </ul>
       </div>
     </div>
   );

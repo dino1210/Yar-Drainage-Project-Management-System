@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef } from "react";
+import { QRCodeCanvas } from "qrcode.react"; 
+import { BrowserMultiFormatReader } from "@zxing/browser"; 
 const InventoryManagement = () => {
   const initialData = [
     {
@@ -75,6 +76,10 @@ const InventoryManagement = () => {
   ];
 
   const [data, setData] = useState(initialData);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [scannedItem, setScannedItem] = useState(null);
+  const [showScanner, setShowScanner] = useState(false);
+  const videoRef = useRef(null);
 
   const handleEdit = (index) => {
     const updatedDescription = prompt(
@@ -112,24 +117,68 @@ const InventoryManagement = () => {
     }
   };
 
+  const handleShowQRCode = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleCloseQRCode = () => {
+    setSelectedItem(null);
+  };
+
+  const startScanner = async () => {
+    setShowScanner(true);
+    const codeReader = new BrowserMultiFormatReader();
+    try {
+      await codeReader.decodeFromVideoDevice(
+        null,
+        videoRef.current,
+        (result, error) => {
+          if (result) {
+            const scannedData = JSON.parse(result.getText());
+            const item = data.find((d) => d.itemCode === scannedData.itemCode);
+            if (item) {
+              setScannedItem(item);
+              setShowScanner(false);
+              codeReader.reset();
+            } else {
+              alert("Item not found in inventory.");
+            }
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Error starting scanner: ", error);
+    }
+  };
+
   return (
     <div className="container mx-auto p-2 text-xs">
       <div className="bg-white rounded-lg p-2 shadow-md">
         <div className="mt-3 bg-white rounded-lg shadow-sm mx-auto p-5">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-lg font-bold">Inventory Management</h1>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs"
+              onClick={startScanner}
+            >
+              Scan QR Code
+            </button>
+          </div>
           <table className="min-w-full table-auto text-xs text-gray-600">
             <thead>
-            <tr>
-  <th className="border-b px-4 py-2 text-left">Item Code</th>
-  <th className="border-b px-4 py-2 text-left">Description</th>
-  <th className="border-b px-4 py-2 text-left">Location</th>
-  <th className="border-b px-4 py-2 text-left">Beginning</th>
-  <th className="border-b px-4 py-2 text-left">Balance</th>
-  <th className="border-b px-4 py-2 text-left">Unit</th>
-  <th className="border-b px-4 py-2 text-left">Required Quantity</th>
-  <th className="border-b px-4 py-2 text-center">Status</th>
-  <th className="border-b px-4 py-2 text-center">Actions</th>
-</tr>
-
+              <tr>
+                <th className="border-b px-4 py-2 text-left">Item Code</th>
+                <th className="border-b px-4 py-2 text-left">Description</th>
+                <th className="border-b px-4 py-2 text-left">Location</th>
+                <th className="border-b px-4 py-2 text-left">Beginning</th>
+                <th className="border-b px-4 py-2 text-left">Balance</th>
+                <th className="border-b px-4 py-2 text-left">Unit</th>
+                <th className="border-b px-4 py-2 text-left">
+                  Required Quantity
+                </th>
+                <th className="border-b px-4 py-2 text-center">Status</th>
+                <th className="border-b px-4 py-2 text-center">Actions</th>
+              </tr>
             </thead>
             <tbody>
               {data.map((item, index) => (
@@ -173,6 +222,12 @@ const InventoryManagement = () => {
                     >
                       Update Status
                     </button>
+                    <button
+                      className="bg-purple-500 text-white px-2 py-1 rounded-lg text-xs ml-2"
+                      onClick={() => handleShowQRCode(item)}
+                    >
+                      Show QR Code
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -180,6 +235,59 @@ const InventoryManagement = () => {
           </table>
         </div>
       </div>
+
+      {/* QR Code Modal */}
+      {selectedItem && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold mb-2">
+              QR Code for {selectedItem.itemCode}
+            </h2>
+            <QRCodeCanvas value={JSON.stringify(selectedItem)} />
+            <button
+              className="bg-red-500 text-white px-2 py-1 rounded-lg text-xs mt-2"
+              onClick={handleCloseQRCode}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* QR Code Scanner */}
+      {showScanner && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold mb-2">Scan QR Code</h2>
+            <video ref={videoRef} style={{ width: "100%" }} />
+            <button
+              className="bg-red-500 text-white px-2 py-1 rounded-lg text-xs mt-2"
+              onClick={() => setShowScanner(false)}
+            >
+              Close Scanner
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Scanned Item Details */}
+      {scannedItem && (
+        <div className="mt-4 bg-white p-4 rounded-lg shadow-md">
+          <h2 className="text-lg font-bold">Scanned Item Details</h2>
+          <p>
+            <strong>Item Code:</strong> {scannedItem.itemCode}
+          </p>
+          <p>
+            <strong>Description:</strong> {scannedItem.description}
+          </p>
+          <p>
+            <strong>Location:</strong> {scannedItem.location}
+          </p>
+          <p>
+            <strong>Status:</strong> {scannedItem.status}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
