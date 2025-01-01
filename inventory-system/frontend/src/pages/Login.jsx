@@ -37,8 +37,10 @@ const Login = ({ onLoginSuccess }) => {
     >
       {/* Title Section */}
       <div className="w-1/3 text-white text-center">
-        <h1 className="text-7xl font-bold">Yardrainage</h1>
-        <p className="text-3xl mt-4">Maintenance and Services</p>
+      <h1 className='text-[#17A2B8] font-bold text-5xl'>Yardrainage</h1>
+                <h2 className='text-[#17A2B8] font-thin text-3xl'>Maintenance and Services</h2>
+                <h2 className='text-white'>Inventory Management System</h2>
+
       </div>
 
       {/* Login/Signup Form */}
