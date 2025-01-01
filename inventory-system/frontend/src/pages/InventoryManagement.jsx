@@ -1,23 +1,7 @@
-import React, { useState, useRef } from "react";
-import { QRCodeCanvas } from "qrcode.react";
-import { BrowserMultiFormatReader } from "@zxing/browser";
+import React, { useState } from "react";
 
 const InventoryManagement = () => {
-  const initialData = [
-    {
-      itemCode: "DISC-001",
-      description: 'Cutting Disc 4" 1mm',
-      location: "Rack 3-Drawer 11",
-      beginning: 1009,
-      balance: 875,
-      unit: "pcs",
-      reqQty: 100,
-      status: "In Use",
-    },
-    // Add more initial data here...
-  ];
-
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState([]); // Start with an empty inventory list
   const [selectedItem, setSelectedItem] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [newProduct, setNewProduct] = useState({
@@ -31,6 +15,7 @@ const InventoryManagement = () => {
     status: "In Use",
   });
 
+  // Add Product Handler
   const handleAddProduct = () => {
     if (!newProduct.itemCode || !newProduct.description) {
       alert("Please fill out all required fields.");
@@ -51,6 +36,7 @@ const InventoryManagement = () => {
     setShowAddModal(false);
   };
 
+  // Edit Product Handler
   const handleEdit = (index) => {
     const updatedDescription = prompt(
       "Enter new description:",
@@ -63,6 +49,7 @@ const InventoryManagement = () => {
     }
   };
 
+  // Delete Product Handler
   const handleDelete = (index) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       const updatedData = data.filter((_, i) => i !== index);
@@ -70,6 +57,7 @@ const InventoryManagement = () => {
     }
   };
 
+  // Update Status Handler
   const handleUpdateStatus = (index) => {
     const newStatus = prompt(
       "Enter new status (In Use, Under Maintenance, Broken):",
@@ -92,14 +80,12 @@ const InventoryManagement = () => {
       <div className="bg-white rounded-lg p-2 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-lg font-bold">Inventory Management</h1>
-          <div className="flex space-x-4">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs"
-              onClick={() => setShowAddModal(true)}
-            >
-              Add Product
-            </button>
-          </div>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs"
+            onClick={() => setShowAddModal(true)}
+          >
+            Add Product
+          </button>
         </div>
         <table className="min-w-full table-auto text-xs text-gray-600">
           <thead>
@@ -110,9 +96,7 @@ const InventoryManagement = () => {
               <th className="border-b px-4 py-2 text-left">Beginning</th>
               <th className="border-b px-4 py-2 text-left">Balance</th>
               <th className="border-b px-4 py-2 text-left">Unit</th>
-              <th className="border-b px-4 py-2 text-left">
-                Required Quantity
-              </th>
+              <th className="border-b px-4 py-2 text-left">Required Quantity</th>
               <th className="border-b px-4 py-2 text-center">Status</th>
               <th className="border-b px-4 py-2 text-center">Actions</th>
             </tr>
@@ -165,145 +149,117 @@ const InventoryManagement = () => {
           </tbody>
         </table>
       </div>
-{/* Add Product Modal */}
-{showAddModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-white p-4 rounded-lg shadow-lg w-1/2">
-      <h2 className="text-lg font-bold mb-4">Add New Product</h2>
-      <div className="space-y-4">
-        {/* Item Code */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Item Code
-          </label>
-          <input
-            type="text"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Item Code"
-            value={newProduct.itemCode}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, itemCode: e.target.value })
-            }
-          />
+
+      {/* Add Product Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg w-1/2">
+            <h2 className="text-lg font-bold mb-4">Add New Product</h2>
+            <div className="space-y-4">
+              <label className="block text-sm font-medium text-gray-700">
+                Item Code
+              </label>
+              <input
+                type="text"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Item Code"
+                value={newProduct.itemCode}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, itemCode: e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Description
+              </label>
+              <input
+                type="text"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Description"
+                value={newProduct.description}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, description: e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Location
+              </label>
+              <input
+                type="text"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Location"
+                value={newProduct.location}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, location: e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Beginning Quantity
+              </label>
+              <input
+                type="number"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Beginning Quantity"
+                value={newProduct.beginning}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, beginning: +e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Balance Quantity
+              </label>
+              <input
+                type="number"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Balance Quantity"
+                value={newProduct.balance}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, balance: +e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Required Quantity
+              </label>
+              <input
+                type="number"
+                className="w-full border px-3 py-2 rounded"
+                placeholder="Enter Required Quantity"
+                value={newProduct.reqQty}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, reqQty: +e.target.value })
+                }
+              />
+              <label className="block text-sm font-medium text-gray-700">
+                Status
+              </label>
+              <select
+                className="w-full border px-3 py-2 rounded"
+                value={newProduct.status}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, status: e.target.value })
+                }
+              >
+                <option value="In Use">In Use</option>
+                <option value="Under Maintenance">Under Maintenance</option>
+                <option value="Broken">Broken</option>
+              </select>
+            </div>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-lg text-xs"
+                onClick={() => setShowAddModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded-lg text-xs"
+                onClick={handleAddProduct}
+              >
+                Add Product
+              </button>
+            </div>
+          </div>
         </div>
-
-        {/* Description */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Description
-          </label>
-          <input
-            type="text"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Description"
-            value={newProduct.description}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, description: e.target.value })
-            }
-          />
-        </div>
-
-        {/* Location */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Location
-          </label>
-          <input
-            type="text"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Location"
-            value={newProduct.location}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, location: e.target.value })
-            }
-          />
-        </div>
-
-        {/* Beginning Quantity */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Beginning Quantity
-          </label>
-          <input
-            type="number"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Beginning Quantity"
-            value={newProduct.beginning}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, beginning: +e.target.value })
-            }
-          />
-        </div>
-
-        {/* Balance Quantity */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Balance Quantity
-          </label>
-          <input
-            type="number"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Balance Quantity"
-            value={newProduct.balance}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, balance: +e.target.value })
-            }
-          />
-        </div>
-
-        {/* Required Quantity */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Required Quantity
-          </label>
-          <input
-            type="number"
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter Required Quantity"
-            value={newProduct.reqQty}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, reqQty: +e.target.value })
-            }
-          />
-        </div>
-
-        {/* Status */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Status
-          </label>
-          <select
-            className="w-full border px-3 py-2 rounded"
-            value={newProduct.status}
-            onChange={(e) =>
-              setNewProduct({ ...newProduct, status: e.target.value })
-            }
-          >
-            <option value="In Use">In Use</option>
-            <option value="Under Maintenance">Under Maintenance</option>
-            <option value="Broken">Broken</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="flex justify-end space-x-4 mt-4">
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded-lg text-xs"
-          onClick={() => setShowAddModal(false)}
-        >
-          Cancel
-        </button>
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded-lg text-xs"
-          onClick={handleAddProduct}
-        >
-          Add Product
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 };

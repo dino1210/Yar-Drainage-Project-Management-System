@@ -121,7 +121,7 @@ const Login = ({ onLoginSuccess }) => {
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <a
             href="#"
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => setIsLogin(!isLogin)}  
             className="text-blue-500 hover:underline"
           >
             {isLogin ? "Signup now" : "Login now"}
