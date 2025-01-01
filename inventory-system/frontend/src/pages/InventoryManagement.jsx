@@ -251,7 +251,7 @@ const InventoryManagement = () => {
                 Cancel
               </button>
               <button
-                className="bg-green-500 text-white px-4 py-2 rounded-lg text-xs"
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs"
                 onClick={handleAddProduct}
               >
                 Add Product
