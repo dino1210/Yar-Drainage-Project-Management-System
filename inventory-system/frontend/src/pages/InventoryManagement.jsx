@@ -243,20 +243,21 @@ const InventoryManagement = () => {
                 <option value="Broken">Broken</option>
               </select>
             </div>
-            <div className="flex justify-end mt-4">
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded-lg text-xs"
-                onClick={() => setShowAddModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg text-xs"
-                onClick={handleAddProduct}
-              >
-                Add Product
-              </button>
-            </div>
+            <div className="flex justify-end space-x-4 mt-4">
+  <button
+    className="bg-red-500 text-white px-6 py-2 rounded-lg text-xs"
+    onClick={() => setShowAddModal(false)}
+  >
+    Cancel
+  </button>
+  <button
+    className="bg-blue-500 text-white px-6 py-2 rounded-lg text-xs"
+    onClick={handleAddProduct}
+  >
+    Add Product
+  </button>
+</div>
+
           </div>
         </div>
       )}
